@@ -22,6 +22,8 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "transmition.h"
+#include "pedals.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,7 +57,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern TIM_HandleTypeDef htim5;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -204,12 +206,12 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-//Front contact
+//Front button
 
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(FRONT_CONTACT_Pin);
+  HAL_GPIO_EXTI_IRQHandler(FRONT_BUTTON_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-
+  check_transfer();
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -219,12 +221,12 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
-//Back contact
+//Back button
 
   /* USER CODE END EXTI1_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(BACK_CONTACT_Pin);
+  HAL_GPIO_EXTI_IRQHandler(BACK_BUTTON_Pin);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
-
+  check_transfer();
   /* USER CODE END EXTI1_IRQn 1 */
 }
 
@@ -238,7 +240,7 @@ void EXTI2_IRQHandler(void)
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(SELECTOR_BUTTON_CLUTCH_Pin);
   /* USER CODE BEGIN EXTI2_IRQn 1 */
-
+  handler_selector(HAL_GPIO_ReadPin(GPIOD, SELECTOR_BUTTON_CLUTCH_Pin));
   /* USER CODE END EXTI2_IRQn 1 */
 }
 
@@ -252,7 +254,7 @@ void EXTI3_IRQHandler(void)
   /* USER CODE END EXTI3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(SELECTOR_CONC_CLUTCH_Pin);
   /* USER CODE BEGIN EXTI3_IRQn 1 */
-
+  handler_selector(HAL_GPIO_ReadPin(GPIOD, SELECTOR_CONC_CLUTCH_Pin));
   /* USER CODE END EXTI3_IRQn 1 */
 }
 
@@ -267,8 +269,26 @@ void EXTI4_IRQHandler(void)
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(PEDAL_BUTTON_BRAKE_FINISH_Pin);
   /* USER CODE BEGIN EXTI4_IRQn 1 */
-
+  handler_selector(HAL_GPIO_ReadPin(GPIOE, PEDAL_BUTTON_BRAKE_FINISH_Pin));
   /* USER CODE END EXTI4_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM5 global interrupt.
+  */
+void TIM5_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM5_IRQn 0 */
+  clutch.ncoder_value = TIM3->CNT;
+
+  handler_potentiometer();
+
+  TIM3->CNT = 0;
+  /* USER CODE END TIM5_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim5);
+  /* USER CODE BEGIN TIM5_IRQn 1 */
+
+  /* USER CODE END TIM5_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

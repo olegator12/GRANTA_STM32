@@ -54,7 +54,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = PEDAL_BUTTON_BRAKE_FINISH_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(PEDAL_BUTTON_BRAKE_FINISH_GPIO_Port, &GPIO_InitStruct);
 
@@ -71,13 +71,13 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(PEDAL_BUTTON_CLUTCH_START_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PDPin PDPin PDPin PDPin */
-  GPIO_InitStruct.Pin = FRONT_CONTACT_Pin|BACK_CONTACT_Pin|SELECTOR_BUTTON_CLUTCH_Pin|SELECTOR_CONC_CLUTCH_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pin = FRONT_BUTTON_Pin|BACK_BUTTON_Pin|SELECTOR_BUTTON_CLUTCH_Pin|SELECTOR_CONC_CLUTCH_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PDPin PDPin */
-  GPIO_InitStruct.Pin = LEFT_CONTACT_Pin|RIGHT_CONTACT_Pin;
+  GPIO_InitStruct.Pin = LEFT_BUTTON_Pin|RIGHT_BUTTON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
