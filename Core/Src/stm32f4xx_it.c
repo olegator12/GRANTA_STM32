@@ -281,7 +281,7 @@ void TIM5_IRQHandler(void)
   /* USER CODE BEGIN TIM5_IRQn 0 */
   clutch.ncoder_value = TIM3->CNT;
 
-  handler_potentiometer();
+  handler_potentiometer(clutch.is_control);
 
   TIM3->CNT = 0;
   /* USER CODE END TIM5_IRQn 0 */

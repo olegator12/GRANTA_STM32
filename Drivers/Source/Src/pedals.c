@@ -2,11 +2,28 @@
 
 Clutch clutch;
 
-void handler_selector(bool is_pressed)
+void clutch_initialize()
+{
+	clutch.potentiometer_value = read_potentiometer();
+	clutch.previous_potentiometer_value = clutch.potentiometer_value;
+	clutch.potentiometer_min = 0;
+	clutch.potentiometer_max = 1023;
+	clutch.ncoder_min = 0;
+	clutch.ncoder_max = 400;
+	clutch.different = 0;
+	clutch.target = 0;
+	clutch.is_pressed = 0;
+	clutch.is_move = 0;
+	clutch.is_control = 1;
+	clutch.direction = MOVE_FORWARD;
+}
+
+void handler_selector(char is_pressed)
 {
 	if(is_pressed == true)
 	{
 		clutch.is_pressed = 1;
+		clutch.is_control = 0;
 		move_along(MOVE_FORWARD);
 	}
 	else
@@ -43,13 +60,19 @@ void move_along(char direction)
 				move_motor(PEDAL_CLUTCH, 0.0);
 				clutch.is_pressed = 0;
 				clutch.direction = MOVE_FORWARD;
+				clutch.is_control = 1;
 			}
 		}
 	}
 }
 
-void handler_potentiometer()
+void handler_potentiometer(char is_control)
 {
+	if(is_control == false)
+	{
+		return;
+	}
+
 	clutch.potentiometer_value = read_potentiometer();
 	clutch.different = clutch.potentiometer_value - clutch.previous_potentiometer_value;
 

@@ -94,7 +94,12 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim5);
 
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_1);
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_2);
+
+  clutch_initialize();
   /* USER CODE END 2 */
 
   /* Infinite loop */
