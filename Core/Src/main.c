@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "pedals.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
