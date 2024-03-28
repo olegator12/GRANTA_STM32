@@ -152,13 +152,13 @@ void move_motor(uint8_t motor_number, float duty)
 
 			if(duty >= 0)
 			{
-				TIM9->CCR1 = ((int32_t) (duty * TIM9->ARR));
-				TIM9->CCR2 = 0;
+				TIM9->CCR2 = ((int32_t) (duty * TIM9->ARR));
+				TIM9->CCR1 = 0;
 			}
 			else
 			{
-				TIM9->CCR1 = 0;
-				TIM9->CCR2 = ((int32_t) (duty * TIM9->ARR));
+				TIM9->CCR2 = 0;
+				TIM9->CCR1 = ((int32_t) (duty * TIM9->ARR));
 			}
 			break;
 

@@ -320,7 +320,7 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* tim_encoderHandle)
     PE9     ------> TIM1_CH1
     PE11     ------> TIM1_CH2
     */
-    GPIO_InitStruct.Pin = ECCODER_GAS_A_Pin|ECCODER_GAS_B_Pin;
+    GPIO_InitStruct.Pin = ENCODER_GAS_B_Pin|ENCODER_GAS_A_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -345,19 +345,19 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* tim_encoderHandle)
     PA15     ------> TIM2_CH1
     PB3     ------> TIM2_CH2
     */
-    GPIO_InitStruct.Pin = ECCODER_BRAKE_A_Pin;
+    GPIO_InitStruct.Pin = ENCODER_BRAKE_B_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(ECCODER_BRAKE_A_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(ENCODER_BRAKE_B_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = ECCODER_BRAKE_B_Pin;
+    GPIO_InitStruct.Pin = ENCODER_BRAKE_A_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(ECCODER_BRAKE_B_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(ENCODER_BRAKE_A_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM2_MspInit 1 */
 
@@ -376,7 +376,7 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* tim_encoderHandle)
     PC6     ------> TIM3_CH1
     PC7     ------> TIM3_CH2
     */
-    GPIO_InitStruct.Pin = ECCODER_CLUTCH_A_Pin|ECCODER_CLUTCH_B_Pin;
+    GPIO_InitStruct.Pin = ENCODER_CLUTCH_B_Pin|ENCODER_CLUTCH_A_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -473,7 +473,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     PE5     ------> TIM9_CH1
     PE6     ------> TIM9_CH2
     */
-    GPIO_InitStruct.Pin = MOTOR_GAS_LEFT_PWM_Pin|MOTOR_GAS_RIGHT_PWM_Pin;
+    GPIO_InitStruct.Pin = MOTOR_GAS_RIGHT_PWM_Pin|MOTOR_GAS_LEFT_PWM_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -502,7 +502,7 @@ void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* tim_encoderHandle)
     PE9     ------> TIM1_CH1
     PE11     ------> TIM1_CH2
     */
-    HAL_GPIO_DeInit(GPIOE, ECCODER_GAS_A_Pin|ECCODER_GAS_B_Pin);
+    HAL_GPIO_DeInit(GPIOE, ENCODER_GAS_B_Pin|ENCODER_GAS_A_Pin);
 
   /* USER CODE BEGIN TIM1_MspDeInit 1 */
 
@@ -520,9 +520,9 @@ void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* tim_encoderHandle)
     PA15     ------> TIM2_CH1
     PB3     ------> TIM2_CH2
     */
-    HAL_GPIO_DeInit(ECCODER_BRAKE_A_GPIO_Port, ECCODER_BRAKE_A_Pin);
+    HAL_GPIO_DeInit(ENCODER_BRAKE_B_GPIO_Port, ENCODER_BRAKE_B_Pin);
 
-    HAL_GPIO_DeInit(ECCODER_BRAKE_B_GPIO_Port, ECCODER_BRAKE_B_Pin);
+    HAL_GPIO_DeInit(ENCODER_BRAKE_A_GPIO_Port, ENCODER_BRAKE_A_Pin);
 
   /* USER CODE BEGIN TIM2_MspDeInit 1 */
 
@@ -540,7 +540,7 @@ void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* tim_encoderHandle)
     PC6     ------> TIM3_CH1
     PC7     ------> TIM3_CH2
     */
-    HAL_GPIO_DeInit(GPIOC, ECCODER_CLUTCH_A_Pin|ECCODER_CLUTCH_B_Pin);
+    HAL_GPIO_DeInit(GPIOC, ENCODER_CLUTCH_B_Pin|ENCODER_CLUTCH_A_Pin);
 
   /* USER CODE BEGIN TIM3_MspDeInit 1 */
 
